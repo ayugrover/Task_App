@@ -1,0 +1,70 @@
+.form{
+  margin-top: 30px;
+}
+
+.viewer{
+  border: 2px solid #e4e4e4;
+  background-color: #e4e4e4;
+  height: 150;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+table{
+  table-layout: fixed;
+  width: 100%;
+  border-collapse:collapse;
+
+}
+
+.table1{
+  font-size: 17px;
+  font-weight: bold;
+  color: #f2f2f2;
+}
+
+
+.table1 th{
+  border: 2px solid white;
+  background-color: black;
+  table-layout: fixed;
+  width: fit-content;
+  padding: 5px;
+  overflow: hidden;
+}
+
+.table1 td, tbody{
+  border: 2px solid white;
+  background-color: black;
+  color: white;
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+}
+
+td {
+  border: 2px solid black;
+  text-align: center;
+}
+
+#data li{
+  color: #4e4e4e;
+  background: #f2f2f2;
+  overflow: hidden;
+  height: 40px;
+  margin: 0;
+  list-style: none;
+  text-align: left;
+  border-bottom: 1px solid black;
+}
+
+
+
+
+
+
+
+
