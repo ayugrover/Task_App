@@ -19,10 +19,17 @@ const reducer = (state, action) => {
     case "SET_DATA":
       return {
         ...state,
-        userData: action.data,
+        userData: action.data.data,
+        total: action.data.total_pages
        };
     case "GET_DATA":
-      return state;
+      {
+       let index = state.userData.findIndex(ele => ele.id === action.id)
+      if(index != -1)
+        return {...state,
+        user: state.userData[index]
+        }
+      }
     default:
       return state;
   }
@@ -32,14 +39,11 @@ function DiaplayData() {
   const [userDet, dispatch] = useReducer(reducer, initialData);
   const navigate = useNavigate();
   const apiURL = 'https://reqres.in/api/users?'
-  const [itemOffset, setItemOffset] = useState(0);
 
-  const pageCount = userDet.userData ? userDet.userData.total_pages : 0;
+  const pageCount = userDet.userData ? userDet.total : 0;
 
   const handlePageClick = (event) => {
-    console.log(event)
     axios.get(apiURL+`page=${event.selected+1}&per_page=${6}`).then(res=>{
-      console.log(res.data)
       dispatch({ type: "SET_DATA", data : res.data});
     })
   }
@@ -52,6 +56,13 @@ function DiaplayData() {
     })
   },[])
 
+  const onHandleClick = (Id, user) =>{
+    dispatch({ type: "GET_DATA", id : Id});
+    navigate(`/DisplayData/${Id}`, {state:{user: user}})
+  }
+
+  console.log(userDet)
+
   return (
     <div>
       <h2>Users List</h2>
@@ -63,9 +74,9 @@ function DiaplayData() {
             <th>Full Name</th> 
           </tr>
           {
-            userDet.userData && userDet.userData.data.length>0&&
-              userDet.userData.data.map(user=>(
-                <tr onClick={()=>navigate(`/DisplayData/${user.id}`, {state:{user: user}})} key={user.id}>
+            userDet.userData && userDet.userData.length>0&&
+              userDet.userData.map(user=>(
+                <tr onClick={()=>onHandleClick(user.id, user)} key={user.id}>
                   <td>{user.id}</td>
                   <td>
                     {user.first_name + ' ' + user.last_name}
@@ -74,15 +85,18 @@ function DiaplayData() {
               ))
             }
         </table>
-        <ReactPaginate
-        breakLabel="..."
-        nextLabel=">"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="<"
-        renderOnZeroPageCount={null}
-      />
+        <br/>
+        <div className='pageWrap'> 
+          <ReactPaginate
+          breakLabel="..."
+          nextLabel="next>"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="<prev"
+          renderOnZeroPageCount={null}
+          />
+        </div>
       </div>
     </div>
   )

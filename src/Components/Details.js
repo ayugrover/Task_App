@@ -4,7 +4,7 @@ import './DisplayData.css'
 
 function Details() {
   const det = useLocation().state.user;
-  
+  console.log(det)
   return (
     <div>
       <h3>Details:</h3>

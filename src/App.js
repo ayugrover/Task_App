@@ -9,6 +9,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={ <DisplayData/>}/>
+          <Route exact path="/DisplayData" element={ <DisplayData/>}/>
           <Route exact path="/DisplayData/:id" element={ <Details/>}/>
         </Routes>
       </Router>
