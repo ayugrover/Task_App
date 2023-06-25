@@ -11,12 +11,22 @@ table{
 tr{
     height: 50px;
 }
+
+tr:hover{
+ cursor: pointer;
+ background-color: #99bbff;
+}
+
 img{
-    height: 50px;
-    width: 40px;
+    height: 200px;
+    width: 200px;
 }
 
 th{
     background-color: #003399;
     color: azure;
+}
+
+span{
+    font-size: larger;
 }
